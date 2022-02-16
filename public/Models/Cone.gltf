@@ -1,0 +1,212 @@
+{
+	"asset": {
+		"version": "2.0",
+		"generator": "Created using the official Cinema 4D glTF Exporter 1.000x284978"
+	},
+	"scenes": [
+		{
+			"nodes": [
+				0
+			]
+		}
+	],
+	"nodes": [
+		{
+			"name": "Cone",
+			"translation": [
+				0.0,
+				13.056387901306153,
+				0.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0,
+				-1.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"children": [
+				1,
+				2
+			]
+		},
+		{
+			"name": "ConeMat",
+			"mesh": 0
+		},
+		{
+			"name": "ConeMat1",
+			"mesh": 1
+		}
+	],
+	"meshes": [
+		{
+			"name": "ConeMat",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 1
+					},
+					"indices": 0,
+					"material": 0
+				}
+			]
+		},
+		{
+			"name": "ConeMat1",
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 3
+					},
+					"indices": 2,
+					"material": 1
+				}
+			]
+		}
+	],
+	"accessors": [
+		{
+			"bufferView": 0,
+			"type": "SCALAR",
+			"min": [
+				0
+			],
+			"componentType": 5123,
+			"count": 528,
+			"byteOffset": 0,
+			"max": [
+				143
+			]
+		},
+		{
+			"bufferView": 1,
+			"type": "VEC3",
+			"min": [
+				-17.5,
+				-13.461416244506836,
+				-17.5
+			],
+			"componentType": 5126,
+			"count": 144,
+			"byteOffset": 0,
+			"max": [
+				17.5,
+				30.931926727294923,
+				17.5
+			]
+		},
+		{
+			"bufferView": 2,
+			"type": "SCALAR",
+			"min": [
+				0
+			],
+			"componentType": 5123,
+			"count": 192,
+			"byteOffset": 0,
+			"max": [
+				63
+			]
+		},
+		{
+			"bufferView": 3,
+			"type": "VEC3",
+			"min": [
+				-8.952404975891114,
+				4.383678436279297,
+				-8.952404975891114
+			],
+			"componentType": 5126,
+			"count": 64,
+			"byteOffset": 0,
+			"max": [
+				8.952404975891114,
+				23.96424674987793,
+				8.952404975891114
+			]
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteOffset": 0,
+			"byteLength": 1056,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteOffset": 1056,
+			"byteLength": 1728,
+			"target": 34962
+		},
+		{
+			"buffer": 1,
+			"byteOffset": 0,
+			"byteLength": 384,
+			"target": 34963
+		},
+		{
+			"buffer": 1,
+			"byteOffset": 384,
+			"byteLength": 768,
+			"target": 34962
+		}
+	],
+	"buffers": [
+		{
+			"uri": "data:application/octet-stream;base64,ggB5AIMAggCJAHkAcgBzAHAAdAB1AHIAdgB3AHQAeAB5AHYAegB7AHgAfAB9AHoAfgB/AHwAcABxAH4AjgCNAHQAjgB0AI8AgQCPAHAAgQBwAIAAjACLAHgAjAB4AI0AigB8AIsAigCAAHwAhgCFAHEAhgBxAIcAiAB1AIkAiACHAHUAhAB9AIUAhACDAH0ARABaAD8AQwBuAD4AQgBDAD0ARQA8AEAAQABBADsAPwBZADoAPgBtADkAPQA+ADgARwBIAEIAOwBGADYAOgBYADUAOQBsADQAOAA5ADMASABvAEMANgBLADEANQBXADAANABrAC8AMwA0AC4ASQBbAEQAMQAAACwAMABWACsALwBqACoALgAvACkASgA3AEUALAAFACcAKwBVACYAKgBpACUAKQAqACQATABNAEcAJwAKACIAJgBUACEAJQBoACAAJAAlAB8ATQBgAEgAIgAPAB0AIQBTABwAIABnABsAHwAgABoATgBcAEkAHQAUABgAHABSABcAGwBmABYAGgAbABUATwAyAEoAGAAZABMAFwBRABIAFgBlABEAFQAWABAAAQACAEwAEwAeAA4AEgBQAA0AEQBkAAwAEAARAAsAAgBhAE0ADgAjAAkADQBfAAgADABjAAcACwAMAAYAAwBdAE4ACQAoAAQACABeAAMABwBiAAIABgAHAAEABAAtAE8AeQB7AIMAiQB3AHkAcwBxAHAAdQBzAHIAdwB1AHQAeQB3AHYAewB5AHgAfQB7AHoAfwB9AHwAcQB/AH4AjQB2AHQAdAByAI8AjwByAHAAcAB+AIAAiwB6AHgAeAB2AI0AfAB6AIsAgAB+AHwAhQB/AHEAcQBzAIcAdQB3AIkAhwBzAHUAfQB/AIUAgwB7AH0AWgBZAD8AbgBtAD4AQwA+AD0APABBAEAAQQBGADsAWQBYADoAbQBsADkAPgA5ADgASABDAEIARgBLADYAWABXADUAbABrADQAOQA0ADMAbwBuAEMASwAAADEAVwBWADAAawBqAC8ANAAvAC4AWwBaAEQAAAAFACwAVgBVACsAagBpACoALwAqACkANwA8AEUABQAKACcAVQBUACYAaQBoACUAKgAlACQATQBIAEcACgAPACIAVABTACEAaABnACAAJQAgAB8AYABvAEgADwAUAB0AUwBSABwAZwBmABsAIAAbABoA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",
+			"byteLength": 2784
+		},
+		{
+			"uri": "data:application/octet-stream;base64,MAAeAD8APwAcAD4APgAaAD0APQAYADwAPAAWADsAOwAUADoAOgASADkAOQAQADgAOAAOADcANwAMADYANgAKADUANQAIADQANAAGADMAMwAEADIAMgACADEAMQAAADAAIAAHAC8ALwAFAC4ALgADAC0ALQABACwALAAfACsAKwAdACoAKgAbACkAKQAZACgAKAAXACcAJwAVACYAJgATACUAJQARACQAJAAPACMAIwANACIAIgALACEAIQAJACAAHgAcAD8AHAAaAD4AGgAYAD0AGAAWADwAFgAUADsAFAASADoAEgAQADkAEAAOADgADgAMADcADAAKADYACgAIADUACAAGADQABgAEADMABAACADIAAgAAADEAAAAeADAABwAFAC8ABQADAC4AAwABAC0AAQAfACwAHwAdACsAHQAbACoAGwAZACkAGQAXACgAFwAVACcAFQATACYAEwARACUAEQAPACQADwANACMADQALACIACwAJACEACQAHACAA9mrXQFOrQkEAAAAA9mpXQMe2v0EAAAAAJgXHQFOrQkGo3yTAJgVHQMe2v0Go36S/ylKYQFOrQkHKUpjAylIYQMe2v0HKUhjAqN8kQFOrQkEmBcfAqN+kP8e2v0EmBUfAnZ7tJVOrQkH2atfAnZ5tJce2v0H2alfAqN8kwFOrQkEmBcfAqN+kv8e2v0EmBUfAylKYwFOrQkHKUpjAylIYwMe2v0HKUhjAJgXHwFOrQkGo3yTAJgVHwMe2v0Go36S/9mrXwFOrQkGdnm2m9mpXwMe2v0Gdnu2lJgXHwFOrQkGo3yRAJgVHwMe2v0Go36Q/ylKYwFOrQkHKUphAylIYwMe2v0HKUhhAqN8kwFOrQkEmBcdAqN+kv8e2v0EmBUdA9jayplOrQkH2atdA9jYypse2v0H2aldAqN8kQFOrQkEmBcdAqN+kP8e2v0EmBUdAylKYQFOrQkHKUphAylIYQMe2v0HKUhhAJgXHQFOrQkGo3yRAJgVHQMe2v0Go36Q/P7H8P4pxjUFqg5jAyhe2JYpxjUFJFKXAP7H8v4pxjUFqg5jAEnVpwIpxjUESdWnAaoOYwIpxjUE/sfy/SRSlwIpxjUHKFzamaoOYwIpxjUE/sfw/EnVpwIpxjUESdWlAP7H8v4pxjUFqg5hA2JGIpopxjUFJFKVAP7H8P4pxjUFqg5hAEnVpQIpxjUESdWlAaoOYQIpxjUE/sfw/SRSlQIpxjUEAAAAAaoOYQIpxjUE/sfy/EnVpQIpxjUESdWnAyVUEQRhHjECNQltADT0PQRhHjEAAAAAAyVUEQRhHjECNQlvA3pHKQBhHjEDekcrAjUJbQBhHjEDJVQTBTQAeJhhHjEANPQ/BjUJbwBhHjEDJVQTB3pHKwBhHjEDekcrAyVUEwRhHjECNQlvADT0PwRhHjEBNAJ6myVUEwRhHjECNQltA3pHKwBhHjEDekcpAjUJbwBhHjEDJVQRBcwDtphhHjEANPQ9BjUJbQBhHjEDJVQRB3pHKQBhHjEDekcpA",
+			"byteLength": 1152
+		}
+	],
+	"materials": [
+		{
+			"pbrMetallicRoughness": {
+				"baseColorFactor": [
+					1.0,
+					0.46666666666666659,
+					0.0,
+					1.0
+				],
+				"metallicFactor": 0.0,
+				"roughnessFactor": 0.5
+			},
+			"name": "Mat",
+			"emissiveFactor": [
+				1.0,
+				0.35,
+				0.0
+			],
+			"alphaMode": "OPAQUE",
+			"doubleSided": false
+		},
+		{
+			"pbrMetallicRoughness": {
+				"baseColorFactor": [
+					1.0,
+					1.0,
+					1.0,
+					1.0
+				],
+				"metallicFactor": 0.0,
+				"roughnessFactor": 0.5
+			},
+			"name": "Mat1",
+			"emissiveFactor": [
+				0.69,
+				0.9845000000000004,
+				1.0
+			],
+			"alphaMode": "OPAQUE",
+			"doubleSided": false
+		}
+	]
+}
