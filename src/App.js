@@ -247,14 +247,14 @@ function Stars() {
   );
 }
 
-function Floor() {
-  return (
-    <mesh position={[0, -85, 0]} rotation={[Math.PI / -2, 0, 0]}>
-      <planeGeometry args={[2000, 2000, 1, 1]} />
-      <meshStandardMaterial color="black" transparent />
-    </mesh>
-  );
-}
+// function Floor() {
+//   return (
+//     <mesh position={[0, -85, 0]} rotation={[Math.PI / -2, 0, 0]}>
+//       <planeGeometry args={[2000, 2000, 1, 1]} />
+//       <meshStandardMaterial color="black" transparent />
+//     </mesh>
+//   );
+// }
 
 function App() {
   return (
