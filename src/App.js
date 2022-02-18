@@ -3,8 +3,6 @@ import './App.css';
 import { Canvas } from '@react-three/fiber'
 import { Car, Cone, TicketBooth, Evans, Light, Stars } from './Shapes';
 import { useGLTF, OrbitControls } from '@react-three/drei'
-import { Bloom, EffectComposer, SSAO, SMAA } from '@react-three/postprocessing'
-import { Resizer, KernelSize, EdgeDetectionMode } from 'postprocessing'
 import { Link, Switch, Route } from "wouter"
 import styled from 'styled-components';
 
@@ -120,7 +118,7 @@ function Controls() {
       maxDistance={1000}
       minAzimuthAngle={Math.PI / -3.5}
       maxAzimuthAngle={Math.PI / 3.5}
-      // minPolarAngle={Math.PI / 3}
+      minPolarAngle={Math.PI / 9}
       maxPolarAngle={Math.PI / 2}
     />
   )
@@ -134,19 +132,6 @@ function CanvasComp() {
         <ambientLight intensity={0.6} />
         <spotLight castShadow color={"#ffffff"} position={[200, 150, -200]} intensity={2} />
         <Shapes />
-        <EffectComposer>
-          <SSAO samples={25} intensity={40} luminanceInfluence={0.5} radius={10} scale={0.5} bias={0.5} />
-          <SMAA edgeDetectionMode={EdgeDetectionMode.DEPTH} />
-          {/* <Bloom
-            intensity={100.0} // The bloom intensity.
-            blurPass={undefined} // A blur pass.
-            width={Resizer.AUTO_SIZE} // render width
-            height={Resizer.AUTO_SIZE} // render height
-            kernelSize={KernelSize.LARGE} // blur kernel size
-            luminanceThreshold={90} // luminance threshold. Raise this value to mask out darker elements in the scene.
-            luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
-          /> */}
-        </EffectComposer>
       </Suspense>
 
       <Controls />
