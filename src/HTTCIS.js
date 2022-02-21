@@ -62,7 +62,6 @@ export function HTTCIS() {
                     width={"100vw"}
                     height={"100vh"}
                     responsive
-                    // autoplay
                     className='video'
                 />
             </Container>
@@ -71,10 +70,10 @@ export function HTTCIS() {
 };
 
 export function HTTCISText() {
-    const abstract = `         For my, Senior Year, Thesis Project I decided to focus on the topic of Nigerian Folktales. A lot of the exploration was into what a modern-day folktale could look like and what topics it would explore. 
-        
-        Due to the colonial influence of the past, modern - day Nigeria is an example of a country where many traditions and aspects of culture fade away, in exchange for a western idea of development.The country is made up of up to 250 ethnic groups, each with their distinct cultures and holds more than 500 indiginous languages.However, the richness in diversity and culture is often not reflected in the current affairs within the country; from politics to everyday societal interactions.By exploring folktales, an aspect of many Nigerian cultures that is slowly fading, I question the role of these traditions in contemporary society and reflect on the trajectory of Nigeria as a nation under its current systems.`
-    const castCrew = `CAST & CREW
+    const abstract = `      How the tortoise cracked its shell is an animated short film based off a classic west African folktale. The project initially started off as research on African folktales and their cultural importance.
+
+        Looking into the role it played within communities, I began to reimagine how these stories can exist in the modern world and what relevance it would have. It turned out to be a lot more relevant than I expected and the more the story unfolded, the more connections were made to current affairs. I realized these stories need to be preserved and kept within the current dialogue, not just as a documentation of the past but as a reminder of the present reality.`
+    const castCrew = `
 ABDULLAH ADISA[Voice of Wale & Script superviser]
 ANDREW ELLIS[Assisted with Soundtrack]
 AUGUST POLITE[Composed Soundrack]
@@ -99,19 +98,32 @@ RAJ WADHWANI[Assisted with Soundtrack]`
                 lineHeight={1}
                 letterSpacing={0.025}
                 textAlign={'left'}
+                font='/Fonts/Poppins/Poppins-Regular.ttf'
             >
                 {abstract}
             </Text>
             <Text
-                // anchorX="center" // default
-                // anchorY="top" // default
-                position={[200, 0, 50]}
+                position={[200, 84, 50]}
                 color={'#FFFFFF'}
                 fontSize={12}
                 maxWidth={400}
                 lineHeight={1}
                 letterSpacing={0.025}
                 textAlign={'center'}
+
+                font='/Fonts/Poppins/Poppins-SemiBold.ttf'
+            >
+                {"CAST & CREW"}
+            </Text>
+            <Text
+                position={[200, 10, 50]}
+                color={'#FFFFFF'}
+                fontSize={12}
+                maxWidth={400}
+                lineHeight={1}
+                letterSpacing={0.025}
+                textAlign={'center'}
+                font='/Fonts/Poppins/Poppins-Regular.ttf'
             >
                 {castCrew}
             </Text>

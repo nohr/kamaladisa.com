@@ -3,16 +3,30 @@ import * as THREE from "three";
 import { useGLTF, useAnimations, MeshDistortMaterial } from '@react-three/drei'
 import useLocation from "wouter/use-location";
 import { proxy, useSnapshot } from 'valtio'
+import { useFrame } from '@react-three/fiber';
 
 const state = proxy({
-    sign: "#FFFFFF",
-    black: '#000000'
+    hover: "#000000",
+    sign: "#B300FF",
+    signText: "#000000",
+    booth: "#696552",
+    bucketWhite: '#000000',
+    bucketBlue: '#000269',
+    bucketYellow: '#FDFF96',
+    snackPurple: '#9500FF',
+    snackPurple2: '#CF8CFF',
+    snackPink: '#FF00AE',
+    snackGreen: '#D5FF00',
+    cupWhite: '#FFFFFF',
+    cupRed: '#FF0000',
+    cupBlue: '#004ECC',
+    cupBlue2: '#6EB9FF',
+    forward: true,
 })
 
 export function TicketBooth() {
     const snap = useSnapshot(state)
     const [location, setLocation] = useLocation();
-    console.log(location);
     const group = useRef();
     const { nodes, materials } = useGLTF("/Models/TicketBooth.gltf");
     const [hovered, setHovered] = useState(false)
@@ -28,47 +42,50 @@ export function TicketBooth() {
             onPointerOut={() => setHovered(false)}>
             <group position={[0, 56, -130]} rotation={[0, Math.PI / 2, 0]} scale={0.5}
             >
-
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes["Ticket_Booth-Pure_Black_1"].geometry}
                     material={materials["Pure Black_1"]}
+                    material-color={hovered ? snap.hover : snap.signText}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes["Ticket_Booth-Metalic_1"].geometry}
                     material={materials.Metalic_1}
+                    material-color={hovered ? snap.hover : snap.booth}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes["Ticket_Booth-Red_Shadow_2"].geometry}
                     material={materials["Red Shadow_2"]}
+                    material-color={hovered ? snap.hover : snap.sign}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes["Ticket_Booth-Wood"].geometry}
                     material={materials.Wood}
+                    material-color={hovered ? snap.hover : snap.booth}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes["Ticket_Booth-Grey"].geometry}
                     material={materials.Grey}
+                    material-color={hovered ? snap.hover : snap.booth}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes["Ticket_Booth-Red_shadow_1"].geometry}
                     material={materials["Red shadow_1"]}
-                // material-color={hovered ? snap.sign : snap.black}
+                    material-color={hovered ? snap.hover : snap.sign}
                 />
 
             </group>
-            <MeshDistortMaterial attach="material" distort={1} speed={10} />
         </group>
     );
 }
@@ -78,17 +95,10 @@ export function Car() {
     console.log(location);
     const { nodes, materials } = useGLTF("Models/car.gltf")
     const group = useRef();
-    const [hovered, setHovered] = useState(false)
-
-    useEffect(() => {
-        document.body.style.cursor = hovered ? 'pointer' : 'auto'
-    }, [hovered])
 
     return (
         <group ref={group} dispose={null}
-            onClick={() => setLocation("/HTTCIS")}
-            onPointerOver={() => setHovered(true)}
-            onPointerOut={() => setHovered(false)}>
+            onClick={() => setLocation("/HTTCIS")}>
             <group position={[0, 0, 0]} rotation={[0, Math.PI / 2, 0]} scale={0.5}>
                 <mesh
                     castShadow
@@ -208,12 +218,12 @@ export function Evans() {
     );
 }
 
-export function Cone(xpos) {
+export function Cone(pos) {
     const group = useRef();
     const { nodes, materials } = useGLTF("/Models/Cone.gltf");
     return (
         <group ref={group} dispose={null}>
-            <group position={[xpos.xpos, -25, 150]}>
+            <group position={[pos.xpos, pos.ypos, 150]}>
                 <mesh
                     castShadow
                     receiveShadow
@@ -278,13 +288,33 @@ export function Stars() {
 }
 
 export function Head() {
-    const { nodes, materials, animations } = useGLTF("/Models/me face.gltf");
-    const { ref, actions } = useAnimations(animations);
-    useEffect(() => {
-        // actions.animation_0.play()
-        console.log(actions.animation_0);
-    })
+    const { nodes, materials } = useGLTF("/Models/me face.gltf");
+    const head = useRef(null);
+    const [location, setLocation] = useLocation();
+    const [hovered, setHovered] = useState(false)
 
+    useEffect(() => {
+        document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    }, [hovered])
+
+    //Animation
+    useFrame(() => {
+        if (head.current.rotation.x > 0 && head.current.rotation.x < 0.4) {
+            if (state.forward) {
+                head.current.rotation.x += .003;
+                state.forward = true;
+            } else if (!state.forward) {
+                head.current.rotation.x -= .003;
+                state.forward = false;
+            }
+        } else if (head.current.rotation.x == 0 || head.current.rotation.x < 0) {
+            head.current.rotation.x += .003;
+            state.forward = true;
+        } else if (head.current.rotation.x == 0.4 || head.current.rotation.x > 0.4) {
+            head.current.rotation.x -= .003;
+            state.forward = false;
+        }
+    });
 
     const light = useMemo(() => new THREE.SpotLight(0xffffff), [])
     light.castShadow = true;
@@ -298,11 +328,16 @@ export function Head() {
     return (
         <group dispose={null}>
             <group>
-                <primitive object={light} position={[0, 260, 670]} />
-                <primitive object={light.target} position={[0, 270, 650]} />
-                <group name="head2" position={[0, 260, 650]}>
+                <primitive object={light} position={[0, 265, 685]} />
+                <primitive object={light.target} position={[0, 240, 650]} />
+                <group name="head2" position={[0, 265, 650]}
+                    scale={0.85}
+                    ref={head}
+                    onClick={() => setLocation("/")}
+                    onPointerOver={() => setHovered(true)}
+                    onPointerOut={() => setHovered(false)}
+                >
                     <mesh
-                        ref={ref}
                         name="head2-Mat2"
                         castShadow
                         receiveShadow
@@ -351,6 +386,7 @@ export function Head() {
 }
 
 export function Snacks() {
+    const snap = useSnapshot(state);
     const group = useRef();
     const { nodes, materials } = useGLTF("/Models/SnackSection.gltf");
     const light = useMemo(() => new THREE.SpotLight(0xffffff), [])
@@ -373,7 +409,7 @@ export function Snacks() {
             onPointerOut={() => setHovered(false)}
             scale={1.5}
         >
-            <primitive object={light} position={[0, 0, 10]} />
+            <primitive object={light} position={[0, 0, 100]} />
             <primitive object={light.target} position={[0, 0, 0]} />
             <group position={[28.6, 19.71, 0]}>
                 <group position={[5.05, 1.76, 0]} rotation={[0, 0, -0.21]}>
@@ -382,12 +418,14 @@ export function Snacks() {
                         receiveShadow
                         geometry={nodes["Straw2-UniformWhite"].geometry}
                         material={nodes["Straw2-UniformWhite"].material}
+                        material-color={hovered ? snap.hover : snap.cupWhite}
                     />
                     <mesh
                         castShadow
                         receiveShadow
                         geometry={nodes["Straw2-RedShadow3"].geometry}
                         material={nodes["Straw2-RedShadow3"].material}
+                        material-color={hovered ? snap.hover : snap.cupRed}
                     />
                 </group>
                 <group position={[1.28, -2.58, 0]}>
@@ -402,6 +440,7 @@ export function Snacks() {
                         receiveShadow
                         geometry={nodes["NewCup2-Blue"].geometry}
                         material={nodes["NewCup2-Blue"].material}
+                        material-color={hovered ? snap.hover : snap.cupBlue}
                     />
                 </group>
                 <mesh
@@ -410,6 +449,8 @@ export function Snacks() {
                     geometry={nodes.S1.geometry}
                     material={nodes.S1.material}
                     position={[4.89, -14.38, 2.89]}
+                    material-color={hovered ? snap.hover : snap.cupBlue2}
+
                 />
                 <mesh
                     castShadow
@@ -432,6 +473,8 @@ export function Snacks() {
                         receiveShadow
                         geometry={nodes["Bucket-RedShadow3"].geometry}
                         material={nodes["Bucket-RedShadow3"].material}
+                        material-color={hovered ? snap.hover : snap.cupRed}
+
                     />
                 </group>
                 <mesh
@@ -440,6 +483,7 @@ export function Snacks() {
                     geometry={nodes.BuyATote.geometry}
                     material={materials.Mat}
                     position={[-6.41, -10.51, 19.47]}
+
                 />
                 <mesh
                     castShadow
@@ -447,6 +491,8 @@ export function Snacks() {
                     geometry={nodes.popcorn2.geometry}
                     material={materials.Popcorn}
                     position={[6.41, 11.89, 0]}
+                    material-color={hovered ? snap.hover : snap.bucketYellow}
+
                 />
             </group>
             <group position={[-32.05, 19.71, 0]}>
@@ -501,6 +547,7 @@ export function Snacks() {
                     material={nodes.Extrude3.material}
                     position={[0.53, -0.04, 0.37]}
                     rotation={[-0.02, -0.05, 0]}
+                    material-color={hovered ? snap.hover : snap.snackPurple2}
                 />
                 <mesh
                     castShadow
@@ -509,6 +556,7 @@ export function Snacks() {
                     material={nodes.Extrude1.material}
                     position={[-0.76, -0.05, 0.31]}
                     rotation={[-0.02, -0.05, 0]}
+                    material-color={hovered ? snap.hover : snap.snackPurple2}
                 />
                 <mesh
                     castShadow
@@ -516,6 +564,8 @@ export function Snacks() {
                     geometry={nodes.Purple2.geometry}
                     material={nodes.Purple2.material}
                     position={[0.23, 0.09, -0.67]}
+                    material-color={hovered ? snap.hover : snap.snackPurple}
+
                 />
             </group>
             <group position={[-24.1, 21.11, 12.82]}>
@@ -549,6 +599,8 @@ export function Snacks() {
                     receiveShadow
                     geometry={nodes["Donate-NeonGreen"].geometry}
                     material={materials.NeonGreen}
+                    material-color={hovered ? snap.hover : snap.snackGreen}
+
                 />
                 <mesh
                     castShadow
@@ -563,6 +615,8 @@ export function Snacks() {
                 geometry={nodes.Pink2.geometry}
                 material={nodes.Pink2.material}
                 position={[13.98, 0, 23.02]}
+                material-color={hovered ? snap.hover : snap.snackPink}
+
             />
             <mesh
                 castShadow
