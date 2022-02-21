@@ -79,8 +79,9 @@ export function HTTCIS() {
         <Container>
             <Vimeo
                 video="586990385"
-                width={1280}
-                height={720}
+                width={"100vw"}
+                height={"100vh"}
+                responsive
                 autoplay
                 className='video'
             />
