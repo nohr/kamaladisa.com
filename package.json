@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@u-wave/react-vimeo": "^0.9.5",
     "@use-gesture/react": "^10.2.6",
     "firebase": "^9.6.6",
     "postprocessing": "^6.24.0",

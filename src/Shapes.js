@@ -1,7 +1,7 @@
-import React, { useRef, useMemo } from 'react'
-import './App.css';
+import React, { useEffect, useRef, useMemo } from 'react'
 import * as THREE from "three";
-import { useGLTF } from '@react-three/drei'
+// import { Canvas } from '@react-three/fiber';
+import { useGLTF, useAnimations } from '@react-three/drei'
 
 export function TicketBooth() {
     const group = useRef();
@@ -230,7 +230,7 @@ export function Stars() {
             .map(() => [
                 Math.random() * 2000 - 1000,
                 Math.random() * 2000 - 1000,
-                Math.random() * 2000 - 1000
+                Math.random() * 4000 - 1000
             ]);
         return [geo, mat, coords];
     }, []);
@@ -240,6 +240,80 @@ export function Stars() {
             {coords.map(([p1, p2, p3], i) => (
                 <mesh key={i} geometry={geo} material={mat} position={[p1, p2, p3]} />
             ))}
+        </group>
+    );
+}
+
+export default function Head() {
+    const { nodes, materials, animations } = useGLTF("/Models/me face.gltf");
+    const { ref, actions, names } = useAnimations(animations);
+    // console.log(actions);
+    useEffect(() => {
+        actions.animation_0.play()
+        // console.log(actions.animation_0);
+    })
+
+
+    const light = useMemo(() => new THREE.SpotLight(0xffffff), [])
+    light.castShadow = true;
+    light.shadow.mapSize.width = 1024;
+    light.shadow.mapSize.height = 1024;
+    light.distance = 40;
+    light.intensity = 150;
+    light.angle = Math.PI / 2;
+    light.decay = 1;
+
+    return (
+        <group dispose={null}>
+            <group>
+                <primitive object={light} position={[0, 260, 700]} />
+                <primitive object={light.target} position={[0, 260, 670]} />
+                <group name="head2" position={[0, 260, 650]}>
+                    <mesh
+                        ref={ref}
+                        name="head2-Mat2"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes["head2-Mat2"].geometry}
+                        material={nodes["head2-Mat2"].material}
+                    />
+                    <mesh
+                        name="head2-Mat1"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes["head2-Mat1"].geometry}
+                        material={materials["Mat.1"]}
+                    />
+                    <mesh
+                        name="head2-Mat2_1"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes["head2-Mat2_1"].geometry}
+                        material={nodes["head2-Mat2_1"].material}
+                    />
+                    <mesh
+                        name="head2-Mat2_2"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes["head2-Mat2_2"].geometry}
+                        material={nodes["head2-Mat2_2"].material}
+                    />
+                    <mesh
+                        name="head2-Mat"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes["head2-Mat"].geometry}
+                        material={materials.Mat}
+                    />
+                    <mesh
+                        name="head2-Mat4"
+                        castShadow
+                        receiveShadow
+                        geometry={nodes["head2-Mat4"].geometry}
+                        material={materials["Mat.4"]}
+                    />
+                </group>
+            </group>
         </group>
     );
 }

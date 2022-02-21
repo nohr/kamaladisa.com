@@ -1,22 +1,11 @@
 import React, { Suspense } from 'react'
-import './App.css';
 import { Canvas } from '@react-three/fiber'
-import { Car, Cone, TicketBooth, Evans, Light, Stars } from './Shapes';
+import Head, { Car, Cone, TicketBooth, Evans, Light, Stars } from './Shapes';
 import { useGLTF, OrbitControls } from '@react-three/drei'
 import { Link, Switch, Route } from "wouter"
 import styled from 'styled-components';
+import { HTTCIS } from './HTTCIS';
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  z-index: 30;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-`
 const Enter = styled(Link)`
   color: white;
   font-size: 48px;
@@ -53,8 +42,6 @@ const Enter = styled(Link)`
   }
 `
 
-
-
 function App() {
 
   return (
@@ -63,23 +50,21 @@ function App() {
         <Route path='/'>
           <Enter to='/HTTCIS'> HTTCIS </Enter>
         </Route>
-        <Container>
-          <Route path='/HTTCIS'>
-            <p>Hi</p>
-          </Route>
-        </Container>
+        <Route path='/HTTCIS'>
+          <HTTCIS />
+        </Route>
       </Switch>
       <CanvasComp />
     </>
   );
 }
 
+useGLTF.preload("/Models/me face.gltf");
 useGLTF.preload("/Models/Evans.gltf");
 useGLTF.preload("/Models/Cone.gltf");
 useGLTF.preload("/Models/car.gltf");
 useGLTF.preload("/Models/Cone.gltf");
 useGLTF.preload("/Models/TicketBooth.gltf");
-
 
 export default App;
 
@@ -87,6 +72,7 @@ function Shapes() {
 
   return (
     <>
+      <Head />
       <Stars />
       <Switch>
         <Route path='/'>
@@ -120,6 +106,7 @@ function Controls() {
       maxAzimuthAngle={Math.PI / 3.5}
       minPolarAngle={Math.PI / 9}
       maxPolarAngle={Math.PI / 2}
+      target={[0, 120, 0]}
     />
   )
 }
@@ -127,15 +114,13 @@ function Controls() {
 function CanvasComp() {
 
   return (
-    <Canvas linear shadows shadowMap frameloop='demand' camera={{ position: [0, 0.25, 1], fov: 60, far: 3000 }}>
+    <Canvas linear shadows shadowMap frameloop='demand' camera={{ position: [0, 120, 1000], fov: 50, far: 3000 }} onCreated={({ camera }) => camera.lookAt(0, 120, 0)}>
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />
         <spotLight castShadow color={"#ffffff"} position={[200, 150, -200]} intensity={2} />
         <Shapes />
       </Suspense>
-
-      <Controls />
-
+      {true && <Controls />}
     </Canvas>
   )
 }
