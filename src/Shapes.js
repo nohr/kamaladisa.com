@@ -246,7 +246,7 @@ export function Stars() {
 
 export default function Head() {
     const { nodes, materials, animations } = useGLTF("/Models/me face.gltf");
-    const { ref, actions, names } = useAnimations(animations);
+    const { ref, actions } = useAnimations(animations);
     // console.log(actions);
     useEffect(() => {
         actions.animation_0.play()
