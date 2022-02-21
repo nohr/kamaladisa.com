@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import Head, { Car, Cone, TicketBooth, Evans, Light, Stars } from './Shapes';
+import { Car, Cone, TicketBooth, Evans, Head, Light, Stars, Snacks } from './Shapes';
 import { useGLTF, OrbitControls } from '@react-three/drei'
 import { Link, Switch, Route } from "wouter"
 import styled from 'styled-components';
-import { HTTCIS } from './HTTCIS';
+import { HTTCIS, HTTCISText } from './HTTCIS';
 
 const Enter = styled(Link)`
   color: white;
@@ -42,32 +42,6 @@ const Enter = styled(Link)`
   }
 `
 
-function App() {
-
-  return (
-    <>
-      <Switch>
-        <Route path='/'>
-          <Enter to='/HTTCIS'> HTTCIS </Enter>
-        </Route>
-        <Route path='/HTTCIS'>
-          <HTTCIS />
-        </Route>
-      </Switch>
-      <CanvasComp />
-    </>
-  );
-}
-
-useGLTF.preload("/Models/me face.gltf");
-useGLTF.preload("/Models/Evans.gltf");
-useGLTF.preload("/Models/Cone.gltf");
-useGLTF.preload("/Models/car.gltf");
-useGLTF.preload("/Models/Cone.gltf");
-useGLTF.preload("/Models/TicketBooth.gltf");
-
-export default App;
-
 function Shapes() {
 
   return (
@@ -87,7 +61,9 @@ function Shapes() {
           <Cone xpos={250} />
         </Route>
         <Route path='/HTTCIS'>
-          <Cone xpos={0} />
+          {/* <Cone xpos={0} /> */}
+          <Snacks />
+          <HTTCISText />
         </Route>
       </Switch>
     </>
@@ -100,21 +76,33 @@ function Controls() {
       enablePan={false}
       enableZoom={true}
       enableRotate={true}
-      minDistance={700}
-      maxDistance={1000}
-      minAzimuthAngle={Math.PI / -3.5}
-      maxAzimuthAngle={Math.PI / 3.5}
-      minPolarAngle={Math.PI / 9}
+      minDistance={1400}
+      maxDistance={1800}
+      minAzimuthAngle={Math.PI / -20}
+      maxAzimuthAngle={Math.PI / 20}
+      minPolarAngle={Math.PI / 2.05}
       maxPolarAngle={Math.PI / 2}
-      target={[0, 120, 0]}
+      target={[0, 150, 0]}
     />
   )
 }
 
 function CanvasComp() {
-
+  const [rotation, setRotation] = useState([0, 0, 0, 0]);
+  const onMouseMove = e => {
+    setRotation([
+      ((e.clientY / e.target.offsetHeight - 0.5) * -Math.PI) / 8,
+      ((e.clientX / e.target.offsetWidth - 0.5) * -Math.PI) / 8,
+      0
+    ]);
+  };
   return (
-    <Canvas linear shadows shadowMap frameloop='demand' camera={{ position: [0, 120, 1000], fov: 50, far: 3000 }} onCreated={({ camera }) => camera.lookAt(0, 120, 0)}>
+    <Canvas linear shadows shadowMap frameloop='demand'
+      camera={{ position: [0, 150, 1400], fov: 20, far: 6000, near: 1 }}
+      onCreated={({ camera }) => camera.lookAt(0, 150, 0)}
+      onMouseMove={onMouseMove}
+      rotation={rotation}
+    >
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />
         <spotLight castShadow color={"#ffffff"} position={[200, 150, -200]} intensity={2} />
@@ -124,3 +112,27 @@ function CanvasComp() {
     </Canvas>
   )
 }
+
+function App() {
+
+  return (
+    <>
+      <Switch>
+        <Route path='/HTTCIS'>
+          <HTTCIS />
+        </Route>
+      </Switch>
+      <CanvasComp />
+    </>
+  );
+}
+
+useGLTF.preload("/Models/me face.gltf");
+useGLTF.preload("/Models/Evans.gltf");
+useGLTF.preload("/Models/Cone.gltf");
+useGLTF.preload("/Models/car.gltf");
+useGLTF.preload("/Models/Cone.gltf");
+useGLTF.preload("/Models/TicketBooth.gltf");
+useGLTF.preload("/Models/SnackSection.gltf");
+
+export default App;
