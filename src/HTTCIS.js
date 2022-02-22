@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { state } from './Shapes';
 import { useSnapshot } from 'valtio';
 import Media from 'react-media';
+import { DoubleSide } from 'three';
+
 
 const Container = styled.div`
   display: flex;
@@ -93,9 +95,17 @@ RAJ WADHWANI[Assisted with Soundtrack]`
                             lineHeight={1.2}
                             letterSpacing={0.025}
                             textAlign={'left'}
+                            fillOpacity={1}
                             font='/Fonts/Poppins/Poppins-Regular.ttf'
+
                         >
                             {abstract}
+                            <meshBasicMaterial
+                                attach="material"
+                                side={DoubleSide}
+                                color={'#FFFFFF'}
+                                toneMapped={false}
+                            />
                         </Text>
                         <Text
                             position={[-75, 20, -25]}
@@ -109,6 +119,12 @@ RAJ WADHWANI[Assisted with Soundtrack]`
                             font='/Fonts/Poppins/Poppins-SemiBold.ttf'
                         >
                             {"CAST & CREW"}
+                            <meshBasicMaterial
+                                attach="material"
+                                side={DoubleSide}
+                                color={'#FFFFFF'}
+                                toneMapped={false}
+                            />
                         </Text>
                         <Text
                             position={[-50, -20, 50]}
@@ -121,11 +137,16 @@ RAJ WADHWANI[Assisted with Soundtrack]`
                             font='/Fonts/Poppins/Poppins-Regular.ttf'
                         >
                             {castCrew}
+                            <meshBasicMaterial
+                                attach="material"
+                                side={DoubleSide}
+                                color={'#FFFFFF'}
+                                toneMapped={false}
+                            />
                         </Text>
                     </> : <>
                         <Text
                             position={[200, 200, 50]}
-                            color={'#FFFFFF'}
                             fontSize={12}
                             maxWidth={300}
                             lineHeight={1.2}
@@ -134,6 +155,12 @@ RAJ WADHWANI[Assisted with Soundtrack]`
                             font='/Fonts/Poppins/Poppins-Regular.ttf'
                         >
                             {abstract}
+                            <meshBasicMaterial
+                                attach="material"
+                                side={DoubleSide}
+                                color={'#FFFFFF'}
+                                toneMapped={false}
+                            />
                         </Text>
                         <Text
                             position={[-160, 84, 50]}
@@ -147,6 +174,12 @@ RAJ WADHWANI[Assisted with Soundtrack]`
                             font='/Fonts/Poppins/Poppins-SemiBold.ttf'
                         >
                             {"CAST & CREW"}
+                            <meshBasicMaterial
+                                attach="material"
+                                side={DoubleSide}
+                                color={'#FFFFFF'}
+                                toneMapped={false}
+                            />
                         </Text>
                         <Text
                             position={[-160, 10, 50]}
@@ -159,6 +192,12 @@ RAJ WADHWANI[Assisted with Soundtrack]`
                             font='/Fonts/Poppins/Poppins-Regular.ttf'
                         >
                             {castCrew}
+                            <meshBasicMaterial
+                                attach="material"
+                                side={DoubleSide}
+                                color={'#FFFFFF'}
+                                toneMapped={false}
+                            />
                         </Text>
                     </>}
         </Media>

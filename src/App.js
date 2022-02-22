@@ -1,10 +1,10 @@
-import React, { Suspense, useRef, useState } from 'react'
+import React, { Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Car, Cone, TicketBooth, Evans, Light, Stars, Snacks, state } from './Shapes';
 import { useGLTF, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Link, Switch, Route } from "wouter"
 import styled from 'styled-components';
-import { Film, HTTCISText, Shop } from './HTTCIS';
+import { Film, HTTCISText } from './HTTCIS';
 
 
 const Face = styled.img`
@@ -58,6 +58,8 @@ function Shapes() {
       <Stars />
       <Switch>
         <Route path='/'>
+
+          <spotLight color={"#ffffff"} position={[200, 150, -200]} intensity={2} />
           <TicketBooth />
           <Light />
           <Car />
@@ -116,8 +118,6 @@ function CanvasComp() {
       // onUpdate={self => self.updateProjectionMatrix()}
       />
       <Suspense fallback={null}>
-        <ambientLight intensity={0.6} />
-        <spotLight color={"#ffffff"} position={[200, 150, -200]} intensity={2} />
         <Shapes />
       </Suspense>
       {true && <Controls />}
