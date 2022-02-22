@@ -63,7 +63,7 @@ export function Film() {
 };
 
 export function HTTCISText() {
-    const abstract = `      How the tortoise cracked its shell is an animated short film based off a classic west African folktale. The project initially started off as research on African folktales and their cultural importance.
+    const abstract = `      How The Tortoise Cracked It's Shell is an animated short film based off a classic west African folktale. The project initially started off as research on African folktales and their cultural importance.
 
         Looking into the role it played within communities, I began to reimagine how these stories can exist in the modern world and what relevance it would have. It turned out to be a lot more relevant than I expected and the more the story unfolded, the more connections were made to current affairs. I realized these stories need to be preserved and kept within the current dialogue, not just as a documentation of the past but as a reminder of the present reality.`
     const castCrew = `

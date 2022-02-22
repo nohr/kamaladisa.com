@@ -1,4 +1,4 @@
-import React, { Suspense, useRef } from 'react'
+import React, { Suspense, useMemo, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Car, Cone, TicketBooth, Evans, Light, Stars, Snacks, state } from './Shapes';
 import { useGLTF, OrbitControls, PerspectiveCamera } from '@react-three/drei'
@@ -52,10 +52,21 @@ function Head() {
   return <Link to='/'><Face src='/meface.gif' /></Link>
 }
 function Shapes() {
-
+  const [coords] = useMemo(() => {
+    const coords = new Array(4000)
+      .fill()
+      .map(() => [
+        Math.random() * 2000 - 1000,
+        Math.random() * 2000 - 1000,
+        Math.random() * 4000 - 4150
+      ]);
+    return [coords];
+  }, []);
   return (
     <>
-      <Stars />
+      {coords.map(([p1, p2, p3], i) => (
+        <Stars x={p1} y={p2} z={p3} key={i} />
+      ))}
       <Switch>
         <Route path='/'>
 

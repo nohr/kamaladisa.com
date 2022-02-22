@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react'
+import React, { useEffect, useState, useRef, useMemo, Suspense } from 'react'
 import * as THREE from "three";
-import { useGLTF, } from '@react-three/drei'
+import { useGLTF, shaderMaterial } from '@react-three/drei'
 import useLocation from "wouter/use-location";
 import { proxy, useSnapshot } from 'valtio'
-import { useFrame } from '@react-three/fiber';
+import { useFrame, extend } from '@react-three/fiber';
 import Media from 'react-media';
+import glsl from 'babel-plugin-glsl/macro'
+
 
 export const state = proxy({
     hover: "#000000",
@@ -284,32 +286,53 @@ export function Light() {
     )
 }
 
-export function Stars() {
+export function Stars(pos) {
     let group = useRef();
+    let WaveShaderMaterial = shaderMaterial(
+        // Uniform
+        {
+            uTime: 0,
+            uColor: new THREE.Color(0xff7777)
+        },
+        // Vertex Shader
+        glsl`
+        varying vec2 vUv;
+    void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 
-    const [geo, mat, coords] = useMemo(() => {
-        const geo = new THREE.SphereBufferGeometry(1, 1, 1);
-        const mat = new THREE.MeshStandardMaterial({
-            color: new THREE.Color('#ffffff'),
-            emissive: '#ffffff',
-            emissiveIntensity: 100,
-        });
-        const coords = new Array(4000)
-            .fill()
-            .map(() => [
-                Math.random() * 2000 - 1000,
-                Math.random() * 2000 - 1000,
-                Math.random() * 4000 - 4000
-            ]);
-        return [geo, mat, coords];
-    }, []);
+    }
+    `,
+        // Fragment Shader
+        glsl`
+        uniform vec3 uColor;
+        precision mediump float;
+        uniform float uTime;
+        varying vec2 vUv;
+
+    void main() {
+                gl_FragColor = vec4(sin(vUv.x + uTime) * uColor, 1.0);
+    }
+    `
+    )
+
+    const ref = useRef();
+
+    useFrame(({ clock }) => { ref.current.uTime = (clock.getElapsedTime() * 2 - (Math.random() * 6)) });
+
+
+    extend({ WaveShaderMaterial });
 
     return (
-        <group ref={group}>
-            {coords.map(([p1, p2, p3], i) => (
-                <mesh key={i} geometry={geo} material={mat} position={[p1, p2, p3]} />
-            ))}
-        </group>
+        <Suspense fallback={null}>
+            <group ref={group}>
+
+                <mesh position={[pos.x, pos.y, pos.z]}>
+                    <sphereGeometry args={[1, 1, 1]} />
+                    <waveShaderMaterial uColor={"white"} ref={ref} />
+                </mesh>
+            </group>
+        </Suspense>
     );
 }
 
@@ -642,7 +665,7 @@ export function Snacks() {
                     <>
                         <group ref={snack} dispose={null}
                             position={[185, -20, 100]}
-                            onClick={() => window.location.href = "https://kamaladisa.com/HTTCIS"}
+                            onClick={() => window.location.href = "https://kamaladisa.com/shop"}
                             onPointerOver={() => setHovered(true)}
                             onPointerOut={() => setHovered(false)}
                             scale={2}
