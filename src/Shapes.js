@@ -484,6 +484,8 @@ export function Snacks() {
     useEffect(() => {
         document.body.style.cursor = hovered ? 'pointer' : 'auto'
     }, [hovered])
+
+    const shopLink = "https://kamaladisa.cargo.site/shop";
     return (
         <Media queries={{ small: { maxWidth: 768 }, big: { minWidth: 768 } }}>
             {matches =>
@@ -491,7 +493,7 @@ export function Snacks() {
                     <>
                         <group ref={snack} dispose={null}
                             position={[95, -20, 100]}
-                            onClick={() => window.location.href = "https://kamaladisa.cargo.site/shop"}
+                            onClick={() => window.location.href = shopLink}
                             onPointerOver={() => setHovered(true)}
                             onPointerOut={() => setHovered(false)}
                             scale={1.5}
@@ -665,7 +667,7 @@ export function Snacks() {
                     <>
                         <group ref={snack} dispose={null}
                             position={[185, -20, 100]}
-                            onClick={() => window.location.href = "https://kamaladisa.cargo.site/shop"}
+                            onClick={() => window.location.href = shopLink}
                             onPointerOver={() => setHovered(true)}
                             onPointerOut={() => setHovered(false)}
                             scale={2}
