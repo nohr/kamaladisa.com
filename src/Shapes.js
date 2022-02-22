@@ -491,7 +491,7 @@ export function Snacks() {
                     <>
                         <group ref={snack} dispose={null}
                             position={[95, -20, 100]}
-                            onClick={() => window.location.href = "https://kamaladisa.com/shop"}
+                            onClick={() => window.location.href = "https://kamaladisa.cargo.site/shop"}
                             onPointerOver={() => setHovered(true)}
                             onPointerOut={() => setHovered(false)}
                             scale={1.5}
@@ -665,7 +665,7 @@ export function Snacks() {
                     <>
                         <group ref={snack} dispose={null}
                             position={[185, -20, 100]}
-                            onClick={() => window.location.href = "https://kamaladisa.com/shop"}
+                            onClick={() => window.location.href = "https://kamaladisa.cargo.site/shop"}
                             onPointerOver={() => setHovered(true)}
                             onPointerOut={() => setHovered(false)}
                             scale={2}
