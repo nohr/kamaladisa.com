@@ -109,10 +109,10 @@ export function Car() {
                 car.current.position.x -= .3;
                 state.forward = false;
             }
-        } else if (car.current.position.x == 0 || car.current.position.x < 0) {
+        } else if (car.current.position.x === 0 || car.current.position.x < 0) {
             car.current.position.x += .3;
             state.forward = true;
-        } else if (car.current.position.x == 40 || car.current.position.x > 40) {
+        } else if (car.current.position.x === 40 || car.current.position.x > 40) {
             car.current.position.x -= .3;
             state.forward = false;
         }
@@ -246,7 +246,7 @@ export function Cone(pos) {
     const [location, setLocation] = useLocation();
 
     useFrame(() => {
-        if (location == "/HTTCIS") {
+        if (location === "/HTTCIS") {
             cone.current.rotation.y -= .03;
         }
     });
@@ -471,10 +471,10 @@ export function Snacks() {
                     snack.current.position.y -= .3;
                     state.forward = false;
                 }
-            } else if (snack.current.position.y == -50 || snack.current.position.y < -20) {
+            } else if (snack.current.position.y === -50 || snack.current.position.y < -20) {
                 snack.current.position.y += .3;
                 state.forward = true;
-            } else if (snack.current.position.y == -20 || snack.current.position.y > -20) {
+            } else if (snack.current.position.y === -20 || snack.current.position.y > -20) {
                 snack.current.position.y -= .3;
                 state.forward = false;
             }
