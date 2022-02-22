@@ -468,7 +468,7 @@ export function Snacks() {
                     <>
                         <group ref={snack} dispose={null}
                             position={[95, -20, 100]}
-                            onClick={() => window.location.href = "https://kamaladisa.com/HTTCIS"}
+                            onClick={() => window.location.href = "https://kamaladisa.com/shop"}
                             onPointerOver={() => setHovered(true)}
                             onPointerOut={() => setHovered(false)}
                             scale={1.5}

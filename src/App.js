@@ -105,7 +105,7 @@ function CanvasComp() {
   const camera = useRef(null);
 
   return (
-    <Canvas linear frameloop='always'
+    <Canvas linear frameloop='always' dpr={[1, 2]}
     >
       <PerspectiveCamera
         makeDefault
