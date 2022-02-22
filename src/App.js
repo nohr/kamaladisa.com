@@ -1,24 +1,20 @@
 import React, { Suspense, useRef, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import * as THREE from 'three'
-import { Car, Cone, TicketBooth, Evans, Head, Light, Stars, Snacks } from './Shapes';
+import { Car, Cone, TicketBooth, Evans, Light, Stars, Snacks, state } from './Shapes';
 import { useGLTF, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { Link, Switch, Route } from "wouter"
 import styled from 'styled-components';
-import { HTTCIS, HTTCISText } from './HTTCIS';
+import { Film, HTTCISText, Shop } from './HTTCIS';
 
-const Enter = styled(Link)`
-  color: white;
-  font-size: 48px;
-  text-decoration: none;
+
+const Face = styled.img`
+display: block;
   position: absolute;
-  z-index: 30;
-  top: 50%;
+  z-index: 300;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
-  border: 5px solid white;
-  padding: 2px 10px 5px 10px;
-  transition: 1s;
+  cursor: pointer;
+  transform: translateX( -50%);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -26,7 +22,16 @@ const Enter = styled(Link)`
   -ms-user-select: none;
   user-select: none;
 
-  &:hover{
+
+    width: 10vw;
+    height: auto;
+  
+
+  @media screen and (max-width: 768px) {
+      width: 25vw;
+  }
+
+    &:hover{
     animation: pulse 3s ease infinite;
     @keyframes pulse {
       0%,
@@ -43,11 +48,13 @@ const Enter = styled(Link)`
   }
 `
 
+function Head() {
+  return <Link to='/'><Face src='/meface.gif' /></Link>
+}
 function Shapes() {
 
   return (
     <>
-      <Head />
       <Stars />
       <Switch>
         <Route path='/'>
@@ -62,11 +69,11 @@ function Shapes() {
           <Cone xpos={250} ypos={-25} />
         </Route>
         <Route path='/HTTCIS'>
-          <Cone xpos={-50} ypos={25} />
-          <Cone xpos={-125} ypos={-25} />
-          <Cone xpos={0} ypos={-25} />
-          <Cone xpos={125} ypos={-25} />
-          <Cone xpos={250} ypos={275} />
+          <Cone xpos={300} ypos={-40} rot={Math.PI / 4} />
+          <Cone xpos={-290} ypos={-25} rot={Math.PI / 10} />
+          <Cone xpos={0} ypos={75} rot={Math.PI / 15} />
+          <Cone xpos={-300} ypos={300} rot={Math.PI / 15} />
+          <Cone xpos={300} ypos={330} rot={Math.PI / 28} />
           <Snacks />
           <HTTCISText />
         </Route>
@@ -81,12 +88,12 @@ function Controls() {
       enablePan={false}
       enableZoom={true}
       enableRotate={true}
-      minDistance={1400}
-      maxDistance={1500}
-      minAzimuthAngle={Math.PI / -40}
-      maxAzimuthAngle={Math.PI / 40}
-      minPolarAngle={Math.PI / 2.05}
-      maxPolarAngle={Math.PI / 2}
+      minDistance={700}
+      maxDistance={1400}
+      minAzimuthAngle={Math.PI / -20}
+      maxAzimuthAngle={Math.PI / 20}
+      minPolarAngle={Math.PI / 3}
+      maxPolarAngle={Math.PI / 1.75}
       target={[0, 150, 0]}
     />
   )
@@ -95,54 +102,46 @@ function Controls() {
 function CanvasComp() {
   const camera = useRef(null);
 
-  const body = document.querySelector("html");
-  body.addEventListener('mousemove', function (e) {
-    let scale = -0.000009;
-    if (camera.current) {
-      camera.current.rotateY(e.movementX * scale);
-      camera.current.rotateX(e.movementY * scale);
-      camera.current.rotation.z = 0;
-    }
-  })
-
-
-  console.log(camera.rotation);
-
-
   return (
-    <Canvas linear shadows shadowMap frameloop='always'
-    // camera={{ position: [0, 150, 1400], fov: 20, far: 6000, near: 1 }}
-    // onCreated={({ camera }) => camera.lookAt(0, 150, 0)}
+    <Canvas linear frameloop='always'
     >
       <PerspectiveCamera
         makeDefault
         ref={camera}
-        aspect={1200 / 600}
         fov={20}
         far={4000}
         near={1}
         target={[0, 150, 0]}
         position={[0, 150, 1400]}
-
-        onUpdate={self => self.updateProjectionMatrix()}
+      // onUpdate={self => self.updateProjectionMatrix()}
       />
       <Suspense fallback={null}>
         <ambientLight intensity={0.6} />
-        <spotLight castShadow color={"#ffffff"} position={[200, 150, -200]} intensity={2} />
+        <spotLight color={"#ffffff"} position={[200, 150, -200]} intensity={2} />
         <Shapes />
       </Suspense>
-      {false && <Controls />}
+      {true && <Controls />}
     </Canvas>
   )
 }
 
 function App() {
 
+  var x = window.matchMedia("(max-width: 768px)")
+  if (x.matches) {
+    state.mobile = true;
+    console.log(state.mobile);
+  }
+
   return (
     <>
       <Switch>
+        <Route path='/'>
+          <Head />
+        </Route>
         <Route path='/HTTCIS'>
-          <HTTCIS />
+          <Head />
+          <Film />
         </Route>
       </Switch>
       <CanvasComp />

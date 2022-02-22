@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text } from '@react-three/drei';
 import Vimeo from '@u-wave/react-vimeo';
 import styled from 'styled-components';
+import { state } from './Shapes';
+import { useSnapshot } from 'valtio';
+import Media from 'react-media';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,7 +17,7 @@ const Container = styled.div`
   margin: 0px 0;
   position: absolute;
   z-index: 200;
-  top: 35%;
+  top: 28%;
   left: 5%;
   -webkit-transform: translate(-5%,-35%);
   transform: translate(-5%,-35%);
@@ -21,38 +25,25 @@ const Container = styled.div`
   overflow-y: auto;
 
   @media screen and (max-width: 768px) {
-      /* width: 100%;
-      height: 80vh;
-      margin-top: 60px;
-      gap: 10px;
+      width: 100%;
       justify-content: flex-start !important;
+      padding: 5px;
+      top: 25%;
 
       .video{
           padding: 0 !important;
           width: 100%;
           height: fit-content;
-      } */
+      }
 
     };
 
 .video {
-  margin: 0 auto;
-  display: block;
   width: 100%;
 }
-
-p{
-    text-indent: 60px;
-}
-
-h2{
-    width: fit-content;
-    margin: 0;
-}
-
 `
 
-export function HTTCIS() {
+export function Film() {
 
     return (
         <>
@@ -86,48 +77,91 @@ MAX JYUDEH JARRETT[Designed Graphics, Typography
         & Composed Dance Scene’s song]
 QIYAO LIN[Assisted with 3D Modeling]
 RAJ WADHWANI[Assisted with Soundtrack]`
-    return (
-        <>
-            <Text
-                // anchorX="center" // default
-                // anchorY="center" // default
-                position={[200, 200, 50]}
-                color={'#FFFFFF'}
-                fontSize={12}
-                maxWidth={300}
-                lineHeight={1}
-                letterSpacing={0.025}
-                textAlign={'left'}
-                font='/Fonts/Poppins/Poppins-Regular.ttf'
-            >
-                {abstract}
-            </Text>
-            <Text
-                position={[200, 84, 50]}
-                color={'#FFFFFF'}
-                fontSize={12}
-                maxWidth={400}
-                lineHeight={1}
-                letterSpacing={0.025}
-                textAlign={'center'}
 
-                font='/Fonts/Poppins/Poppins-SemiBold.ttf'
-            >
-                {"CAST & CREW"}
-            </Text>
-            <Text
-                position={[200, 10, 50]}
-                color={'#FFFFFF'}
-                fontSize={12}
-                maxWidth={400}
-                lineHeight={1}
-                letterSpacing={0.025}
-                textAlign={'center'}
-                font='/Fonts/Poppins/Poppins-Regular.ttf'
-            >
-                {castCrew}
-            </Text>
-        </>
+
+
+    return (
+        <Media queries={{ small: { maxWidth: 768 } }}>
+            {matches =>
+                matches.small ?
+                    <>
+                        <Text
+                            position={[0, 100, -50]}
+                            color={'#FFFFFF'}
+                            fontSize={8}
+                            maxWidth={290}
+                            lineHeight={1.2}
+                            letterSpacing={0.025}
+                            textAlign={'left'}
+                            font='/Fonts/Poppins/Poppins-Regular.ttf'
+                        >
+                            {abstract}
+                        </Text>
+                        <Text
+                            position={[-75, 20, -25]}
+                            color={'#FFFFFF'}
+                            fontSize={8}
+                            maxWidth={400}
+                            lineHeight={1}
+                            letterSpacing={0.025}
+                            textAlign={'center'}
+
+                            font='/Fonts/Poppins/Poppins-SemiBold.ttf'
+                        >
+                            {"CAST & CREW"}
+                        </Text>
+                        <Text
+                            position={[-50, -20, 50]}
+                            color={'#FFFFFF'}
+                            fontSize={6}
+                            maxWidth={400}
+                            lineHeight={1.2}
+                            letterSpacing={0.025}
+                            textAlign={'left'}
+                            font='/Fonts/Poppins/Poppins-Regular.ttf'
+                        >
+                            {castCrew}
+                        </Text>
+                    </> : <>
+                        <Text
+                            position={[200, 200, 50]}
+                            color={'#FFFFFF'}
+                            fontSize={12}
+                            maxWidth={300}
+                            lineHeight={1.2}
+                            letterSpacing={0.025}
+                            textAlign={'left'}
+                            font='/Fonts/Poppins/Poppins-Regular.ttf'
+                        >
+                            {abstract}
+                        </Text>
+                        <Text
+                            position={[-160, 84, 50]}
+                            color={'#FFFFFF'}
+                            fontSize={12}
+                            maxWidth={400}
+                            lineHeight={1}
+                            letterSpacing={0.025}
+                            textAlign={'center'}
+
+                            font='/Fonts/Poppins/Poppins-SemiBold.ttf'
+                        >
+                            {"CAST & CREW"}
+                        </Text>
+                        <Text
+                            position={[-160, 10, 50]}
+                            color={'#FFFFFF'}
+                            fontSize={10}
+                            maxWidth={400}
+                            lineHeight={1.2}
+                            letterSpacing={0.025}
+                            textAlign={'center'}
+                            font='/Fonts/Poppins/Poppins-Regular.ttf'
+                        >
+                            {castCrew}
+                        </Text>
+                    </>}
+        </Media>
     )
 
 }
