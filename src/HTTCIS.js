@@ -67,18 +67,18 @@ export function HTTCISText() {
 
 Looking into the role it played within communities, I began to reimagine how these stories can exist in the modern world and what relevance it would have. It turned out to be a lot more relevant than I expected and the more the story unfolded, the more connections were made to current affairs. I realized these stories need to be preserved and kept within the current dialogue, not just as a documentation of the past but as a reminder of the present reality.`
     const castCrew = `
-ABDULLAH ADISA[Voice of Wale & Script superviser]
-ANDREW ELLIS[Assisted with Soundtrack]
-AUGUST POLITE[Composed Soundrack]
-DAMOLA ADEGBUYI[Voice of Lani]
-DOTUN ABESHINBIOKE[Intro Narrator]
-HAMZA ADISA[Voice of Remi]
-KAMAL ADISA[Directed and Animated Film]
-LANRE ADISA[Voice of MC Hustle]
-MAX JYUDEH JARRETT[Designed Graphics, Typography
+ABDULLAH ADISA [Voice of Wale & Script superviser]
+ANDREW ELLIS [Assisted with Soundtrack]
+AUGUST POLITE [Composed Soundrack]
+DOTUN ABESHINBIOKE [Intro Narrator]
+HAMZA ADISA [Voice of Remi]
+KAMAL ADISA [Directed and Animated Film]
+LANRE ADISA [Voice of MC Hustle]
+MAX JYUDEH JARRETT [Designed Graphics, Typography
         & Composed Dance Scene’s song]
-QIYAO LIN[Assisted with 3D Modeling]
-RAJ WADHWANI[Assisted with Soundtrack]`
+QIYAO LIN [Assisted with 3D Modeling]
+RAJ WADHWANI [Assisted with Soundtrack]
+TIWA ADEGBUYI [Voice of Lani]`
 
 
 
